@@ -1,0 +1,11 @@
+{
+    "name": "toshiba/prodavnica",
+    "description": "Unit tests",
+    "authors": [
+        {
+            "name": "Sanja Budic",
+            "email": "sanjabudic2907@gmail.com"
+        }
+    ],
+    "require": {}
+}
