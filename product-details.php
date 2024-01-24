@@ -74,7 +74,7 @@ if (isset($_POST['btn_deleteProduct']) ) {
 
       <?php if ($loggedInUser->acc_type == "admin") { ?>
         <a href="./add-product.php?id=<?php echo $product->id; ?>" class="btn btn-outline-success mt-3">Update product details</a>
-        <div>
+        <div class="mt-3">
           <form action="" method="post">
             <input type="hidden" name="product_id" value="<?php echo $product->id; ?>" />
             <button class="btn btn-outline-danger btn-sm" name="btn_deleteProduct">
@@ -84,10 +84,6 @@ if (isset($_POST['btn_deleteProduct']) ) {
           </form>
         </div>
       <?php } ?>
-
-
-
-
     </div>
   </div>
 

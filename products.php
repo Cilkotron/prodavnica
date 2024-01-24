@@ -74,6 +74,7 @@ if( $page >= $numOfPages ) {
 </div>
 
 <nav aria-label="Page navigation example">
+  <?php if(count($products) > 0) : ?> 
   <ul class="pagination justify-content-center">
     <li class="page-item">
       <a class="page-link" href="./products.php?page=<?php echo $prev; ?>" aria-disabled="true">Previous</a>
@@ -96,6 +97,7 @@ if( $page >= $numOfPages ) {
       <a class="page-link" href="./products.php?page=<?php echo $next; ?>">Next</a>
     </li>
   </ul>
+  <?php endif; ?> 
 </nav>
 
 <?php include './footer.layout.php'; ?>

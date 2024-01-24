@@ -54,7 +54,7 @@ $stmt_createProductsTable = $db->prepare("
     `cat_id` int,
     `title` varchar(255),
     `description` text,
-    `price` decimal(10, 2) DEFAULT 0,
+    `price` int DEFAULT 0,
     `img` varchar(255),
     `kolicina_na_stanju` int DEFAULT 0,
     `created_at` datetime DEFAULT now(),
