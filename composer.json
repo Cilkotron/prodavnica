@@ -1,0 +1,18 @@
+{
+    "name": "toshiba/prodavnica",
+    "description": "Unit tests",
+    "require": {
+        "phpunit/phpunit": "^10.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Toshiba\\Prodavnica\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Sanja Budic",
+            "email": "sanjabudic2907@gmail.com"
+        }
+    ]
+}
