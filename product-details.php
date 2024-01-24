@@ -4,7 +4,7 @@
 
 <?php
 
-if( !isset($_GET['id']) ) {
+if (!isset($_GET['id'])) {
   Helper::addError("The product ID is missing.");
   header("Location: ./products.php");
   die();
@@ -14,23 +14,31 @@ $loggedInUser = new User();
 $loggedInUser->loadLoggedInUser();
 $product = new Product($_GET['id']);
 
-if( !$product->created_at || $product->deleted_at ) {
+if (!$product->created_at || $product->deleted_at) {
   Helper::addError("Product not found.");
   header("Location: ./products.php");
   die();
 }
 
-if( isset($_POST['btn_addToCart']) ) {
+if (isset($_POST['btn_addToCart'])) {
   $addedToCart = $product->addToCart($_POST['quantity']);
-  if( $addedToCart ) {
+  if ($addedToCart) {
     Helper::addMessage('Product added to cart successfully.');
   } else {
     Helper::addError('Failed to add product to cart.');
   }
 }
 
-if( isset($_POST['btn_rating']) ) {
+if (isset($_POST['btn_rating'])) {
   $product->rate($_POST['btn_rating']);
+}
+
+if (isset($_POST['btn_deleteProduct']) ) {
+  $productToDelete = new Product($_POST['product_id']);
+  if( $productToDelete->delete() ) {
+    header("Location: ./products.php");
+    Helper::addMessage('Product deleted successfully!');
+  }
 }
 
 
@@ -49,7 +57,7 @@ if( isset($_POST['btn_rating']) ) {
   <div class="col-md-7">
     <h3 class="mb-5">Description</h3>
     <p class="mb-5">
-    <?php echo $product->description; ?>
+      <?php echo $product->description; ?>
     </p>
 
     <div class="d-flex flex-column align-items-end">
@@ -64,9 +72,22 @@ if( isset($_POST['btn_rating']) ) {
         </div>
       </form>
 
-      <?php if( $loggedInUser->acc_type == "admin" ) { ?>
+      <?php if ($loggedInUser->acc_type == "admin") { ?>
         <a href="./add-product.php?id=<?php echo $product->id; ?>" class="btn btn-outline-success mt-3">Update product details</a>
+        <div>
+          <form action="" method="post">
+            <input type="hidden" name="product_id" value="<?php echo $product->id; ?>" />
+            <button class="btn btn-outline-danger btn-sm" name="btn_deleteProduct">
+              <i class="far fa-trash-alt"></i>
+              Delete product
+            </button>
+          </form>
+        </div>
       <?php } ?>
+
+
+
+
     </div>
   </div>
 
@@ -83,7 +104,7 @@ if( isset($_POST['btn_rating']) ) {
       <button name="btn_rating" value="3" class="btn_rating fas fa-star"></button>
       <button name="btn_rating" value="4" class="btn_rating fas fa-star"></button>
       <button name="btn_rating" value="5" class="btn_rating fas fa-star"></button>
-      
+
       ( <b>
         <?php echo number_format($product->getRating(), 2, '.', ','); ?>
       </b> )
